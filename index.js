@@ -100,13 +100,14 @@ app.get("/v1/ausgrid/planned", async (req, res) => {
         const finish = getPlannedEnd(o);
 
         return {
-          WebId: o.WebId ?? null,
           OutageDisplayType: o.OutageDisplayType ?? "P",
           Suburb: o.Suburb || o.Area || o.Location || null,
           CustomersAffected: o.CustomersAffected ?? o.Customers ?? null,
           OutageStatus: o.OutageStatus || o.Status || "Planned",
           StartDateTime: toISOorNull(start),
           EndDateTime: toISOorNull(finish),
+          Cause: o.Cause,
+          Streets: o.Streets,
           // keep coords optional & small; remove if you hit size limits
           Coords: Array.isArray(o.Coords) ? o.Coords.slice(0, 8) : undefined,
         };
