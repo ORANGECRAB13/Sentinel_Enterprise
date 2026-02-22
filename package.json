@@ -1,0 +1,25 @@
+{
+  "name": "sentinel_enterprise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ORANGECRAB13/Sentinel_Enterprise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ORANGECRAB13/Sentinel_Enterprise/issues"
+  },
+  "homepage": "https://github.com/ORANGECRAB13/Sentinel_Enterprise#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
