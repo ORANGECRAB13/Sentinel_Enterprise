@@ -489,6 +489,11 @@ h3 {
   margin-top: 8px;
 }
 
+.map-row {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+
 .transcript-resizer {
   width: 10px;
   border-radius: 10px;
@@ -560,7 +565,7 @@ h2 {
 }
 
 #map {
-  height: 260px;
+  height: 320px;
   width: 100%;
   border-radius: 14px;
   margin-top: 10px;
