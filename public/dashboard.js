@@ -337,7 +337,8 @@ async function loadAllCalls() {
     state.callsById.set(call.callId, call);
   }
 
-  if (!state.callsById.has(state.callId) && calls[0]) {
+  // Always default to the most recently updated call on load
+  if (calls[0]) {
     state.callId = calls[0].callId;
   }
 
@@ -354,9 +355,21 @@ function startPolling() {
       if (!resp.ok) throw new Error(resp.status);
       const data = await resp.json();
       const calls = Array.isArray(data.calls) ? data.calls : [];
+
+      // Detect any call not previously known
+      const newCall = calls.find(c => !state.callsById.has(c.callId));
+
       for (const call of calls) {
         state.callsById.set(call.callId, call);
       }
+
+      // Auto-switch to a new incoming call
+      if (newCall) {
+        state.callId = newCall.callId;
+        subscribeTranscript(newCall.callId);
+        loadTranscriptForCall(newCall.callId);
+      }
+
       renderMetrics(Array.from(state.callsById.values()));
       renderCallList();
       const current = state.callsById.get(state.callId);
