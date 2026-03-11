@@ -477,6 +477,13 @@ h3 {
   color: var(--muted);
 }
 
+.call-workspace {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 190px);
+  min-width: 0;
+}
+
 .call-workspace .grid-top,
 .call-workspace .grid-bottom {
   display: grid;
@@ -487,6 +494,14 @@ h3 {
 
 .call-workspace .grid-bottom {
   margin-top: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.call-workspace .grid-bottom .map-tile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -556,12 +571,9 @@ h2 {
   color: var(--danger);
 }
 
-.map-tile {
-  min-height: 330px;
-}
-
 #map {
-  height: 320px;
+  flex: 1;
+  min-height: 0;
   width: 100%;
   border-radius: 14px;
   margin-top: 10px;
