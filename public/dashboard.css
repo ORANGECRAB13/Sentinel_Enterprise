@@ -489,10 +489,6 @@ h3 {
   margin-top: 8px;
 }
 
-.map-row {
-  grid-column: 1 / -1;
-  margin-top: 0;
-}
 
 .transcript-resizer {
   width: 10px;
