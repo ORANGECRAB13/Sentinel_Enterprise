@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentinel Enterprise | Voice Ops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/landing.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <main class="landing-shell">
+      <header class="top-nav">
+        <div class="logo">SE</div>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#workflow">Workflow</a>
+          <a href="/dashboard">Open Dashboard</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Sentinel Voice Intelligence</p>
+          <h1>Real-time call triage, mapping, and summaries in one command center.</h1>
+          <p class="subcopy">
+            Pipe ElevenLabs workflow webhooks straight into Sentinel and monitor each live call with transcript, geocoded location, and AI summary updates.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="/dashboard">Launch Live Dashboard</a>
+            <a class="btn ghost" href="#workflow">See Integration Flow</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Webhook Endpoints</h3>
+          <ul>
+            <li><code>POST /webhook/transcript</code></li>
+            <li><code>POST /webhook/location</code></li>
+            <li><code>POST /webhook/summary</code></li>
+            <li><code>GET /events</code> for live push</li>
+          </ul>
+          <p>Use <code>callId</code> to isolate each call stream.</p>
+        </div>
+      </section>
+
+      <section id="features" class="feature-grid">
+        <article class="feature-card">
+          <h4>Live Transcript Rail</h4>
+          <p>Agent/customer turns stream into the right panel with timestamps and status-aware styling.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Location Geocoding</h4>
+          <p>Send plain text locations and Sentinel geocodes + pins the caller in a dark map layer.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Summary Layer</h4>
+          <p>Post summary updates from your node to keep operators synced without reading the full call.</p>
+        </article>
+      </section>
+
+      <section id="workflow" class="workflow">
+        <h2>Simple workflow</h2>
+        <div class="steps">
+          <div><span>1</span> ElevenLabs event fires</div>
+          <div><span>2</span> Node posts transcript/location/summary</div>
+          <div><span>3</span> Dashboard updates instantly over SSE</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/ORANGECRAB13/Sentinel_Enterprise#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.98.0",
+    "express": "^5.2.1",
+    "twilio": "^5.12.2"
   }
 }

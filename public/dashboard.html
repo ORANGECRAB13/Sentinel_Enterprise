@@ -1,0 +1,225 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentinel Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="/dashboard.css" />
+  </head>
+  <body>
+    <main class="dashboard-wrap">
+      <aside class="sidebar card">
+        <div class="brand">SE</div>
+        <button class="icon-btn" data-tab="home">Home</button>
+        <button class="icon-btn active" data-tab="calls">Calls</button>
+        <button class="icon-btn" disabled>Agents</button>
+        <button class="icon-btn" disabled>Settings</button>
+        <a class="back-link" href="/">Back</a>
+      </aside>
+
+      <section class="board card">
+        <header class="board-header">
+          <div>
+            <p class="eyebrow">Sentinel Enterprise</p>
+            <h1>Call center dashboard</h1>
+          </div>
+          <div id="connectionState" class="status-pill">Connecting...</div>
+        </header>
+
+        <section class="tab-panel" id="tab-home">
+          <div class="home-scene">
+            <div class="home-content">
+              <div class="home-topbar">
+                <div class="home-top-actions">
+                  <button class="top-action">Create</button>
+                  <button class="top-action ghost">Search</button>
+                </div>
+              </div>
+
+              <div class="home-top-cards">
+                <article class="tile over-card">
+                  <p class="over-title">Overall information</p>
+                  <div class="over-metrics">
+                    <div>
+                      <p class="metric-value" id="metricTotalCalls">0</p>
+                      <p class="tiny muted">Total calls received</p>
+                    </div>
+                    <div>
+                      <p class="metric-value" id="metricAvgDuration">0</p>
+                      <p class="tiny muted">Avg minutes / call</p>
+                    </div>
+                    <div>
+                      <p class="metric-value" id="metricTotalDuration">0</p>
+                      <p class="tiny muted">Total duration (min)</p>
+                    </div>
+                  </div>
+                  <div class="segment-row">
+                    <div class="segment active">Live</div>
+                    <div class="segment">In Progress</div>
+                    <div class="segment">Completed</div>
+                  </div>
+                </article>
+
+                <article class="tile weekly-card">
+                  <div class="row-between">
+                    <p class="over-title">Weekly process</p>
+                    <span class="tiny muted">Calls</span>
+                  </div>
+                  <div class="line-chart">
+                    <svg viewBox="0 0 400 140" preserveAspectRatio="none">
+                      <polyline points="0,112 45,74 90,98 135,56 180,84 225,46 270,88 315,68 360,86 400,72" />
+                      <polyline class="muted-line" points="0,96 45,90 90,84 135,100 180,74 225,96 270,70 315,86 360,82 400,90" />
+                    </svg>
+                  </div>
+                  <div class="weekday-labels">
+                    <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                  </div>
+                </article>
+
+                <article class="tile month-card">
+                  <p class="over-title">Month progress</p>
+                  <p class="month-sub"><strong>30%</strong> completed to last month</p>
+                  <div class="mini-donut-wrap">
+                    <div class="mini-donut"></div>
+                    <div class="legend">
+                      <div><i class="dot c1"></i> Work</div>
+                      <div><i class="dot c2"></i> Meditation</div>
+                      <div><i class="dot c3"></i> Projects</div>
+                    </div>
+                  </div>
+                  <p class="label">CSAT Score</p>
+                  <p class="metric-value" id="metricCsat">5.5</p>
+                </article>
+              </div>
+
+              <div class="home-mid-cards">
+                <article class="tile">
+                  <h3>Calls by City</h3>
+                  <div id="cityBars" class="stack-bars"></div>
+                </article>
+                <article class="tile">
+                  <h3>Calls by Channel</h3>
+                  <div class="progress-row"><span>Call Center</span><strong>32.3%</strong></div>
+                  <div class="bar"><i style="width:32.3%"></i></div>
+                  <div class="progress-row"><span>Chatbot</span><strong>25.1%</strong></div>
+                  <div class="bar"><i style="width:25.1%"></i></div>
+                  <div class="progress-row"><span>Email</span><strong>22.7%</strong></div>
+                  <div class="bar"><i style="width:22.7%"></i></div>
+                  <div class="progress-row"><span>Web</span><strong>20.0%</strong></div>
+                  <div class="bar"><i style="width:20.0%"></i></div>
+                </article>
+                <article class="tile">
+                  <h3>Calls by Sentiment</h3>
+                  <div class="progress-row"><span>Negative</span><strong>33.6%</strong></div>
+                  <div class="bar"><i style="width:33.6%"></i></div>
+                  <div class="progress-row"><span>Neutral</span><strong>26.6%</strong></div>
+                  <div class="bar"><i style="width:26.6%"></i></div>
+                  <div class="progress-row"><span>Positive</span><strong>11.9%</strong></div>
+                  <div class="bar"><i style="width:11.9%"></i></div>
+                </article>
+              </div>
+
+              <div class="home-bottom-strip">
+                <article class="tile strip-card">
+                  <h4>Response Time</h4>
+                  <p>Within SLA 62.6%</p>
+                </article>
+                <article class="tile strip-card">
+                  <h4>Top Reason</h4>
+                  <p>Billing Question 71.2%</p>
+                </article>
+                <article class="tile strip-card">
+                  <h4>Weekday Peak</h4>
+                  <p>Thursday highest call volume</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-panel hidden" id="tab-calls">
+          <div class="calls-layout">
+            <aside class="tile call-list-panel">
+              <div class="row-between">
+                <h3>Call History</h3>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <p class="tiny muted" id="callListCount">0 calls</p>
+                  <button id="callListToggle" class="icon-btn" title="Collapse panel" aria-label="Toggle call history" style="width:28px;height:28px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:8px;">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div id="callList" class="call-list"></div>
+            </aside>
+
+            <div class="call-workspace">
+              <div class="grid-top">
+                <article class="tile call-tile">
+                  <div class="tile-head">
+                    <h2 id="callerName">Live Caller</h2>
+                    <span id="callStatus" class="status-tag">Active</span>
+                  </div>
+                  <p id="callerNumber" class="muted">+1 (000) 000-0000</p>
+                  <p class="label">Issue</p>
+                  <p id="callIssue" class="issue">Awaiting issue details</p>
+                  <div class="row-between small-top">
+                    <span class="label">Severity</span>
+                    <strong id="callSeverity" class="severity">Moderate</strong>
+                  </div>
+
+                  <div class="summary-inline">
+                    <h3>AI Summary</h3>
+                    <p id="callSummary">Summary not received yet.</p>
+                    <p id="updatedAt" class="tiny muted">Updated: --</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="grid-bottom">
+                <article class="tile map-tile">
+                  <div class="row-between">
+                    <h3>Outage locations</h3>
+                    <p id="outageLocationSummary" class="tiny muted">No outages mapped yet</p>
+                  </div>
+                  <div id="map"></div>
+                </article>
+              </div>
+            </div>
+
+            <div class="transcript-resizer" id="transcriptResizer" aria-hidden="true"></div>
+
+            <aside class="tile transcript-tile call-transcript-column">
+              <div class="row-between">
+                <h3>Transcript</h3>
+                <p id="transcriptCount" class="tiny muted">0 entries</p>
+              </div>
+              <div id="transcriptList" class="transcript-list"></div>
+            </aside>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="/dashboard.js"></script>
+  </body>
+</html>
