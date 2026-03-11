@@ -872,6 +872,11 @@ app.get("/dashboard", (req, res) => {
   res.sendFile(`${process.cwd()}/public/dashboard.html`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on http://localhost:${PORT}`);
-});
+// Local dev: start server directly. Vercel imports this file and uses the export.
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Listening on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
