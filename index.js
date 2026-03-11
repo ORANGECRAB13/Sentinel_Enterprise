@@ -3,6 +3,7 @@ const twilio = require("twilio");
 const { createClient } = require("@supabase/supabase-js");
 
 const fs = require("fs");
+const path = require("path");
 
 function loadDotEnv() {
   const envPath = `${process.cwd()}\\.env`;
@@ -864,12 +865,12 @@ app.post("/twilio/transcription", verifyTwilioRequest, async (req, res) => {
   res.status(200).send("OK");
 });
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
-  res.sendFile(`${process.cwd()}/public/index.html`);
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 app.get("/dashboard", (req, res) => {
-  res.sendFile(`${process.cwd()}/public/dashboard.html`);
+  res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
 // Local dev: start server directly. Vercel imports this file and uses the export.
